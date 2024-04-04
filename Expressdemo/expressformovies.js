@@ -41,5 +41,12 @@ app.delete('/api/movie/:id',(req,res)=>{
 })
 app.get('/api/movies/:id',(req,res)=>{
     let movie = movies.find(movie=>movie.id==req.params.id);
+    if(movie)
     res.json(movie);
+    else res.status(404).send('Item not found');
+})
+app.put('/api/movies',(req,res)=>{
+    const updatedMovie = req.body
+    movies = movies.map((movie)=>updatedMovie.id==movie.id?updatedMovie:movie); 
+    res.json(movies);
 })
